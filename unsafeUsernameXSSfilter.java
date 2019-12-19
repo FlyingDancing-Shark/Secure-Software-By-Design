@@ -13,7 +13,7 @@ public class User {
 	private final String username;
 	
 	/* this method first check input parameter are not null, then use a imaginary 
-	 third-party library to validate if it contain malicious JavaScript code. */
+	   third-party library to validate if it contain malicious JavaScript code. */
 	public User(final Long id, final String username) {
 	
 		notNull(id);
@@ -22,11 +22,11 @@ public class User {
 		
 		
 		/* obviously, this tied your software's security to the security of 
-		that validate library, in other word, if hackers find some way to bypass 
-		the "ValidationUtils", or there exist some security flaws within the 
-		library itself, then it could be exploit, thus compromise our "User" class,
-		furthermore, any handling logic in the software, such as delivery user 
-		name to display it at browser-end , will also suffer from this vulnerability. */
+		   that validate library, in other word, if hackers find some way to bypass 
+		   the "ValidationUtils", or there exist some security flaws within the 
+		   library itself, then it could be exploit, thus compromise our "User" class,
+		   furthermore, any handling logic in the software, such as delivery user 
+		   name to display it at browser-end , will also suffer from this vulnerability. */
 		this.username = ValidationUtils.validateForXSS(username);
 	}
 	
