@@ -1,6 +1,8 @@
 /********************************************
 description
 
+rethink the essence of a user name with domain experts, 
+then redesign it to achieve more security.
 ********************************************/
 
 import static org.apache.commons.lang3.Validate.*;
@@ -36,3 +38,18 @@ public class Username {
 }
 
 
+public class User {
+	
+	private final Long id;
+	
+	// the use of secure "Username" object ensure our final "User" object less exploitable.
+	private final Username username;
+	
+	//constructor ?
+	public User(final Long id, final Username username) {
+		this.id = notNull(id);
+		this.username = notNull(username):
+	}
+	
+	//........
+}
