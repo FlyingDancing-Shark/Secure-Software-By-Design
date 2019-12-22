@@ -24,7 +24,8 @@ public final class XMLparser {
 										
 		try {
 			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-											
+			
+			// what happens if  we forget to enable one or several of these feature, or new feature?
 			factory.setExpandEntityReferences(false);
 			factory.setFeature(FEATURE_SECURE_PROCESSING, true);
 			factory.setFeature(DISALLOW_DOCTYPE, true);
@@ -32,6 +33,7 @@ public final class XMLparser {
 			factory.setFeature(ALLOW_EXTERNAL_PARAMETER_ENTITIES, false);
 			factory.setFeature(ALLOW_EXTERNAL_DTD, false);
 			
+			// what happens if the underlying parser implementation changes? (have security bugs)
 			retun factory.newDocumentBuilder().parse(input);
 		}
 		catch(ParserConfigurationException e) {
