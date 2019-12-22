@@ -81,7 +81,7 @@ public final class XMLparser {
 		try {
 			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			
-			// what happens if  we forget to enable one or several of these feature, or new feature?
+			
 			factory.setExpandEntityReferences(false);
 			factory.setFeature(FEATURE_SECURE_PROCESSING, true);
 			factory.setFeature(DISALLOW_DOCTYPE, true);
@@ -89,7 +89,10 @@ public final class XMLparser {
 			factory.setFeature(ALLOW_EXTERNAL_PARAMETER_ENTITIES, false);
 			factory.setFeature(ALLOW_EXTERNAL_DTD, false);
 			
-			// what happens if the underlying parser implementation changes? (have security bugs)
+			/* here we actually parse the input XML candidate, the latter must be validated by a Lexical Scanner 
+			class instance first to guarantee that the "input" doesn't contain what we not want ( in this case, any entity
+			that may be used to perform "billions of laughs" attack ) and contain what we need (in this case, a 
+			complete "Customer" object )*/
 			retun factory.newDocumentBuilder().parse(input);
 		}
 		catch(ParserConfigurationException e) {
