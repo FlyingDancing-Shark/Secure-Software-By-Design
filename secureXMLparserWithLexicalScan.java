@@ -6,6 +6,40 @@ processing.
 ********************************************/
 
 import static javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING;
+import static org.apache.commons.lang3.Validate.notNull;
+
+
+public class LexicalScanner {
+	
+	public static final class ElementHandler extends org.xml.sax.ext.DefaultHandler2 {
+	
+		@Override
+		public void startEntity(final String name) throws SAXException {
+		
+			throw new IllegalArgumentException("Entities are illegal");
+		}
+	}
+
+	
+	private static final String LEXICAL_HANDER = "http://xml.org/sax/properties/lexical-handler";
+	
+	public static boolean isValid(final InputStream data)
+												throws Exception {
+		
+		notNull(data);
+		final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+		final ElementHandler handler = new ElementHandler();
+		saxParser.getXMLReader().setProperty(LEXICAL_HANDER, handler);
+		
+		try {
+			saxParser.parse(data, handler);
+			return true;
+		}
+		catch(IllegalArgumentException e) {
+			return false;
+		}
+	}
+}
 
 public final class XMLparser {
 
@@ -41,3 +75,4 @@ public final class XMLparser {
 	}
 	
 }
+
