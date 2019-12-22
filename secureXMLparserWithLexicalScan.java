@@ -23,8 +23,7 @@ public class LexicalScanner {
 	
 	private static final String LEXICAL_HANDER = "http://xml.org/sax/properties/lexical-handler";
 	
-	public static boolean isValid(final InputStream data)
-												throws Exception {
+	public static boolean isValid(final InputStream data)  throws Exception {
 		
 		notNull(data);
 		final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
