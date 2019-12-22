@@ -38,7 +38,8 @@ public class LexicalScanner {
 		
 		@Override
 		public void startEntity(final String name) throws SAXException {
-		
+			
+			// Abort scan if an entity is found
 			throw new IllegalArgumentException("Entities are illegal");
 		}
 	}
@@ -49,11 +50,17 @@ public class LexicalScanner {
 	public static boolean isValid(final InputStream data)  throws Exception {
 		
 		notNull(data);
+		
+		// Create a SAX parser
 		final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+		
+		// Create a lexical element handler to detect entities
 		final ElementHandler handler = new ElementHandler();
+		
+		// Register the handler to listen to lexical events
 		saxParser.getXMLReader().setProperty(LEXICAL_HANDER, handler);
 		
-		try {
+		try {	// Scan the XML for entities
 			saxParser.parse(data, handler);
 			return true;
 		}
