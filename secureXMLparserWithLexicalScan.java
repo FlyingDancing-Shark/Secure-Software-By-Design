@@ -7,12 +7,35 @@ processing.
 
 import static javax.xml.XMLConstants.FEATURE_SECURE_PROCESSING;
 import static org.apache.commons.lang3.Validate.notNull;
-
+import static org.apache.commons.lang3.Validate.isTrue;
 
 public class LexicalScanner {
 	
-	public static final class ElementHandler extends org.xml.sax.ext.DefaultHandler2 {
+	private static final class ElementHandler extends org.xml.sax.ext.DefaultHandler2 {
 	
+		private final Set<String> requiredElements = new HashSet<>();
+		
+		ElementHandler() {
+			requiredElements.add("customer");
+			requiredElements.add("phone");
+			requiredElements.add("address");
+			requiredElements.add("street");
+			requiredElements.add("city");
+			requiredElements.add("country");
+		}
+		
+		@Override
+		public void startElement(final String uri,  final String localName,
+								 final String qName, final Attributes attributes) throws SAXException {
+			
+			requiredElements.remove(qName.toLowerCase());
+		}
+		
+		@Override
+		public void endDocument() throws SAXException {
+			isTrue(requiredElements.isEmpty());	
+		}
+		
 		@Override
 		public void startEntity(final String name) throws SAXException {
 		
