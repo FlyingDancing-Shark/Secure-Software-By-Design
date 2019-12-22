@@ -40,6 +40,7 @@ public class LexicalScanner {
 	}
 }
 
+
 public final class XMLparser {
 
 	static final String DISALLOW_DOCTYPE = 
