@@ -20,11 +20,10 @@ public final class XMLparser {
 			"http://apache.org/xml/features/nonvalidating/load-external-dtd";
 	
 	public static Document parse(final InputStream input)
-										throws SAXException, IOException {
+						throws SAXException, IOException {
 										
 		try {
-			final DocumentBuilderFactory factory = 
-											DocumentBuilderFactory.newInstance();
+			final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 											
 			factory.setExpandEntityReferences(false);
 			factory.setFeature(FEATURE_SECURE_PROCESSING, true);
