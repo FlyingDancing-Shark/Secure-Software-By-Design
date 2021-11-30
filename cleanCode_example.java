@@ -1,5 +1,5 @@
- public static String renderPageWithSetupsAndTeardowns
- (PageData pageData, boolean isSuite) throws Exception 
+ public static String renderPageWithSetupsAndTeardowns(
+                                      PageData pageData, boolean isSuite) throws Exception 
  {
       boolean isTestPage = pageData.hasAttribute("Test");
       if (isTestPage) {
